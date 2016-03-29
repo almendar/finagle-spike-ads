@@ -1,0 +1,33 @@
+swagger: '2.0'
+
+info:
+  version: "0.0.8"
+  title: Recommendation
+
+basePath: /api/v1/feed
+
+
+paths:
+  /create:
+    post:
+      description: |
+        Creates a new Feed
+      parameters:
+        - x-useraccountid:
+          in: header
+          name: x-useraccountid
+          required: true
+          type: string
+        - name: Feed Settings
+          description: Feed Settings
+          required: true
+          in: body
+          schema:
+            $ref: '#/definitions/FeedRequest'
+      tags:
+        - Feeds
+      responses:
+        200:
+          description: Completed successfully
+          schema:
+            $ref: "#/definitions/IdTw"
