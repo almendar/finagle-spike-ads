@@ -1,3 +1,6 @@
+### Create binaries
+
+`sbt assembly`
 
 ### Start recommendation
 `./run-recommendation.sh`
