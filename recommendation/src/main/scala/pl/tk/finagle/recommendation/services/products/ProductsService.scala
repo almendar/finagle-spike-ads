@@ -13,7 +13,7 @@ import com.twitter.util.Future
 class ProductsService @Inject()(mapper: FinatraObjectMapper) extends Service[Request, Response] with Logging {
 
   private val url = "127.0.0.1:3001,127.0.0.1:3002,127.0.0.1:3003"
-  private val productServiceHttpClient =
+  private val productServiceHttpClient: Service[Request, Response] =
     Http.client.configured(FailFast(false)).newClient(url, "productService").toService
 
   override def apply(request: Request): Future[Response] = productServiceHttpClient(request)

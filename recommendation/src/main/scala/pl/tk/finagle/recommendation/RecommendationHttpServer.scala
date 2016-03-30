@@ -5,6 +5,7 @@ import com.twitter.finatra.http.filters.{CommonFilters, LoggingMDCFilter, TraceI
 import com.twitter.finatra.http.routing.HttpRouter
 
 class RecommendationHttpServer extends HttpServer {
+
   override def configureHttp(router: HttpRouter) {
     router
       .filter[LoggingMDCFilter[Request, Response]]
@@ -12,11 +13,6 @@ class RecommendationHttpServer extends HttpServer {
       .filter[CommonFilters]
       .add[pl.tk.finagle.recommendation.controller.RecommendationController]
       .add[pl.tk.finagle.recommendation.controller.SwaggerController]
-  }
-
-  //@TODO
-  override def warmup() {
-//    run[TwitterCloneWarmup]()
   }
 }
 

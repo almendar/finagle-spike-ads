@@ -16,13 +16,15 @@ case class RecommendationFromCookieRequest(@Inject request: Request,
                                            @Header `x-auth`: String)
 
 @Singleton
-class RecommendationController @Inject()(recommendationEngine: RecommendationEngine)
+class RecommendationController @Inject()
+(recommendationEngine: RecommendationEngine)
   extends Controller with Logging {
 
   get("/recommend/:eshop_id/:cookie_id") { r: RecommendationFromCookieRequest =>
-    TracingFilter("RecommendationEngine") andThen
-      recommendationEngine apply
-      RecommendationCmd(r.cookieId, r.eshopId)
+    infoResult("Hello") {
+      TracingFilter("RecommendationEngine") andThen
+        recommendationEngine apply
+        RecommendationCmd(r.cookieId, r.eshopId)
+    }
   }
-
 }
