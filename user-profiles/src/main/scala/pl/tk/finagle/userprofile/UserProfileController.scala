@@ -7,11 +7,10 @@ import com.twitter.finatra.request.{Header, RouteParam}
 import com.twitter.inject.Logging
 
 
-case class UserProfileRequest(@RouteParam cookieId: Int,
-                              @Header `x-auth`: String)
+case class UserProfileRequest(@RouteParam cookieId: Int)
 
 class UserProfileController @Inject()(userProfileService: UserProfileService) extends Controller with Logging {
   get("/userprofile/:cookie_id") { request: UserProfileRequest =>
-    userProfileService(CookieId(request.cookieId))
+    debugFutureResult("User profile")(userProfileService(CookieId(request.cookieId)))
   }
 }

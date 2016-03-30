@@ -28,8 +28,7 @@ object Product {
 
 case class ProductsRequest(@Inject request: Request,
                            @RouteParam eshopId: Int,
-                           @QueryParam limit: Int = 100,
-                           @Header `x-auth`: String)
+                           @QueryParam limit: Int = 100)
 
 class ProductsController @Inject()(objectMapper: FinatraObjectMapper) extends Controller with Logging {
 
